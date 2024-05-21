@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "TheUpwardGoat.sln"
+    "dotnet.defaultSolution": "the-upward-goat.sln",
+    "dotnet.preferCSharpExtension": true
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5e1050c96a76f4d8e8235903d83e70, type: 3}
+  m_Name: PlayerTest
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpMoveSpeed: 10
+  jumpValue: 0
+  maxJump: 17
+  jumpPerF: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  boxSize: {x: 0.75, y: 0.3}
+  castDistance: 0.52
+  maxFall: 9.5
+  moveDesaceleration: 5
+  maxFallToStomp: 5
+  normalMat: {fileID: 6200000, guid: e5624190c28ae63449bb50b2b343f40f, type: 2}
+  bounceMat: {fileID: 6200000, guid: c3e64e8ffba884947a5160e74f1e1df1, type: 2}
