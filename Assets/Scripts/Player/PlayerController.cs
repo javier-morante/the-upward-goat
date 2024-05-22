@@ -142,7 +142,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
         {
             ChangeState(State.Charging);
 
-        }else if (rb.velocity.y < 0)
+        }else if (rb.velocity.y < 0 && !isGrounded)
         {
             ChangeState(State.Falling);
         }
@@ -160,7 +160,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
         {
             ChangeState(State.Charging);
 
-        }else if (rb.velocity.y < 0)
+        }else if (rb.velocity.y < 0 && !isGrounded)
         {
             ChangeState(State.Falling);
         }
