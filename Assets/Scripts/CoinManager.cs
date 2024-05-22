@@ -12,6 +12,7 @@ public class CoinManager : MonoBehaviour,IObserver<PlayerEvents>
     [SerializeField] private Text coinText;
     [SerializeField] private Text jumpText;
     [SerializeField] private Subject<PlayerEvents> subject;
+
     public void OnNotify(PlayerEvents notification)
     {
         switch (notification)

@@ -41,6 +41,17 @@ public class PlayerControllerT : Subject<PlayerEvents>
      public ParticleSystem stompP;
      public ParticleSystem jumpDust;
 
+    [Space(10)]
+
+    [Header("Sounds")]
+    public AudioClip jump;
+    public AudioClip fall;
+    public AudioClip stomp;
+    public AudioClip bounce;
+    public AudioClip coin;
+
+
+
     private enum State
     {
         Idle,
@@ -162,6 +173,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
         if ((jumpValue >= maxJump || !jumpPressed && jumpValue >= 0.1f) && isGrounded)
         {
             this.NotifyObservers(PlayerEvents.Jump);
+            AudioManager.instance.PlaySoundFX(jump,transform,1f);
             ChangeState(State.Jumping);
         }
     }
@@ -183,10 +195,13 @@ public class PlayerControllerT : Subject<PlayerEvents>
         if(Stomp())
         {
             ChangeState(State.Stomping);
+            AudioManager.instance.PlaySoundFX(stomp,transform,1f);
 
-        }else if (isGrounded)
+        }else if (isGrounded && rb.velocity.y == 0f)
         {
+            Debug.Log("caido");
             ChangeState(State.Idle);
+            AudioManager.instance.PlaySoundFX(fall,transform,1f);
         }
     }
 
@@ -280,6 +295,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     void CreateDust()
     {
+        
         jumpDust.Play();
     }
 
@@ -298,6 +314,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
     void OnCollisionEnter2D(Collision2D collsion){
 
         if(!isGrounded && col.sharedMaterial == bounceMat){
+            AudioManager.instance.PlaySoundFX(bounce,transform,1f);
             ChangeState(State.Bouncing);
         }
     }
@@ -305,6 +322,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
     void OnTriggerEnter2D(Collider2D collsion){
         if(collsion.gameObject.tag == "Coin"){
             this.NotifyObservers(PlayerEvents.CoinCollected);
+            AudioManager.instance.PlaySoundFX(coin,transform,1f);
             Destroy(collsion.gameObject);
         }
     }

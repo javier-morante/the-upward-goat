@@ -9690,7 +9690,7 @@ Transform:
   m_GameObject: {fileID: 8634030454962821491}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4400008, y: 0.2608093, z: 0}
+  m_LocalPosition: {x: 4.54, y: -1.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9739,7 +9739,7 @@ SpriteRenderer:
   m_SortingLayerID: 346555335
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -353091074, guid: d5fe77e413b457345968ad694aaf9959, type: 3}
+  m_Sprite: {fileID: -146046647, guid: d5fe77e413b457345968ad694aaf9959, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9807,7 +9807,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8634030454962821491}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e5624190c28ae63449bb50b2b343f40f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9855,7 +9855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e9b37b737616b48a77c3d2b5020955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3
   jumpMoveSpeed: 10
   jumpValue: 0
   maxJump: 17
@@ -9864,7 +9864,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   boxSize: {x: 0.75, y: 0.3}
-  castDistance: 0.52
+  castDistance: 0.58
   maxFall: 9.5
   moveDesaceleration: 5
   maxFallToStomp: 5
@@ -9872,3 +9872,8 @@ MonoBehaviour:
   bounceMat: {fileID: 6200000, guid: c3e64e8ffba884947a5160e74f1e1df1, type: 2}
   stompP: {fileID: 8788378474793937689}
   jumpDust: {fileID: 8406111268056961831}
+  jump: {fileID: 8300000, guid: 8bebd52b84535484dbda72a55a1f849a, type: 3}
+  fall: {fileID: 8300000, guid: f83ecf24ac1d9cf4c8717e285f04e82b, type: 3}
+  stomp: {fileID: 8300000, guid: 16c216cf8572c284ab2d328a428be3b4, type: 3}
+  bounce: {fileID: 8300000, guid: a61ef6f30444c2045a9cfc4bfda4c420, type: 3}
+  coin: {fileID: 8300000, guid: 4ab53f27df7eaee44aca78448e2e5a4f, type: 3}
