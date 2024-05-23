@@ -7,6 +7,7 @@ public class CameraBoundsDetector : MonoBehaviour
     private Camera mainCamera;
     private Transform mCamera;
     [SerializeField] private Transform player; 
+    [SerializeField] private BoxCollider2D playerC; 
 
     private void Start()
     {
@@ -16,21 +17,23 @@ public class CameraBoundsDetector : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(playerC.size.y / 2f);
+
         // Obtener las coordenadas de pantalla del jugador
         Vector2 playerScreenPos = mainCamera.WorldToScreenPoint(player.position);
-        Vector2 cameraCenterScreenPos = new Vector3(mainCamera.pixelWidth / 2, mainCamera.pixelHeight / 2, 0);
+        Vector2 cameraCenterScreenPos = new Vector2(mainCamera.pixelWidth / 2, mainCamera.pixelHeight / 2);
         Vector2 offset = playerScreenPos - cameraCenterScreenPos;
-
         float height = 2f * mainCamera.orthographicSize;
         float width = height * mainCamera.aspect;
 
+        float a = playerC.size.y / 2f;
+        float b = playerC.size.x / 2f;
 
-        // Obtener los límites de la cámara en píxeles
         Rect cameraBounds = mainCamera.pixelRect;
 
-        // Verificar si el jugador está dentro de los límites de la cámara
-        if (playerScreenPos.x < cameraBounds.xMin || playerScreenPos.x > cameraBounds.xMax ||
-            playerScreenPos.y < cameraBounds.yMin || playerScreenPos.y > cameraBounds.yMax)
+
+        if (playerScreenPos.x-b < cameraBounds.xMin || playerScreenPos.x+b > cameraBounds.xMax ||
+            playerScreenPos.y-a < cameraBounds.yMin || playerScreenPos.y+a > cameraBounds.yMax)
         {
             if (Mathf.Abs(offset.x) > Mathf.Abs(offset.y))
             {
