@@ -9674,6 +9674,7 @@ GameObject:
   - component: {fileID: 3448464692295445966}
   - component: {fileID: 3351940432003678746}
   - component: {fileID: 3581579398466292185}
+  - component: {fileID: 6421000341072832287}
   m_Layer: 7
   m_Name: Rocky
   m_TagString: Untagged
@@ -9878,3 +9879,11 @@ MonoBehaviour:
   stomp: {fileID: 8300000, guid: 16c216cf8572c284ab2d328a428be3b4, type: 3}
   bounce: {fileID: 8300000, guid: a61ef6f30444c2045a9cfc4bfda4c420, type: 3}
   coin: {fileID: 8300000, guid: 4ab53f27df7eaee44aca78448e2e5a4f, type: 3}
+--- !u!81 &6421000341072832287
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634030454962821491}
+  m_Enabled: 1

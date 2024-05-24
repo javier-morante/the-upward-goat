@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     
     [SerializeField] private AudioSource soundFXObject;
-    [SerializeField] private AudioSource soundFXObject2;
 
     void Awake()
     {
@@ -17,7 +16,6 @@ public class AudioManager : MonoBehaviour
         }else{
 
         }
-        soundFXObject2 = GetComponent<AudioSource>();
         
     }
 
@@ -37,20 +35,4 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    // public void PlaySoundFX(AudioClip audioClip,Transform spawn,float volume){
-        
-    //     soundFXObject2.clip = audioClip;
-
-    //     soundFXObject2.volume = volume;
-
-    //     soundFXObject2.Play();
-
-    // }
-    
-
-    internal void PlaySoundFX(object audioClip, Transform transform, float v)
-    {
-        throw new NotImplementedException();
-    }
 }
-
