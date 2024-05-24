@@ -9830,7 +9830,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0013580322, y: -0.0013580322}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9841,7 +9841,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.875}
+  m_Size: {x: 0.6875305, y: 0.8070984}
   m_EdgeRadius: 0
 --- !u!114 &3581579398466292185
 MonoBehaviour:
@@ -9856,17 +9856,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  jumpMoveSpeed: 7
+  jumpMoveSpeed: 6
   jumpValue: 0
-  maxJump: 17
-  jumpPerF: 0.5
+  maxJump: 16
+  jumpPerF: 0.8
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  boxSize: {x: 0.75, y: 0.3}
-  castDistance: 0.58
+  boxSize: {x: 0.69, y: 0.3}
+  castDistance: 0.55
   maxFall: 9.5
-  moveDesaceleration: 10
+  moveDesacelerationFalling: 7
+  moveDesacelerationBounce: 5
   maxFallToStomp: 5
   normalMat: {fileID: 6200000, guid: e5624190c28ae63449bb50b2b343f40f, type: 2}
   bounceMat: {fileID: 6200000, guid: c3e64e8ffba884947a5160e74f1e1df1, type: 2}

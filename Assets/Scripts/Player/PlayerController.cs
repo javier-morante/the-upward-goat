@@ -27,7 +27,8 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     [Header("Fall")]
      public float maxFall;
-     public float moveDesaceleration = 1;
+     public float moveDesacelerationFalling = 1;
+     public float moveDesacelerationBounce = 1;
      public float maxFallToStomp = 5;
 
     [Space(10)]
@@ -124,9 +125,17 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     private void HandleBouncind()
     {
-        ApplyFallVelocity();
-        if(isGrounded){
+        ApplyFallVelocity(moveDesacelerationBounce);
+        if(Stomp())
+        {
+            ChangeState(State.Stomping);
+            AudioManager.instance.PlaySoundFX(stomp,transform,1f);
+
+        }else if (isGrounded && rb.velocity.y == 0f)
+        {
+            Debug.Log("caido");
             ChangeState(State.Idle);
+            AudioManager.instance.PlaySoundFX(fall,transform,1f);
         }
     }
 
@@ -190,7 +199,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     void HandleFalling()
     {
-        ApplyFallVelocity();
+        ApplyFallVelocity(moveDesacelerationFalling);
 
         if(Stomp())
         {
@@ -277,11 +286,11 @@ public class PlayerControllerT : Subject<PlayerEvents>
         jumpValue = 0.0f;
     }
 
-    void ApplyFallVelocity()
+    void ApplyFallVelocity(float deseleration)
     {
         
         rb.velocity = new Vector2(
-            Mathf.MoveTowards(rb.velocity.x, 0, moveDesaceleration * Time.fixedDeltaTime),
+            Mathf.MoveTowards(rb.velocity.x, 0, deseleration * Time.fixedDeltaTime),
             Mathf.Max(rb.velocity.y, -maxFall)
         );
         
