@@ -17,7 +17,7 @@ public class CameraBoundsDetector : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerC.size.y / 2f);
+        
 
         // Obtener las coordenadas de pantalla del jugador
         Vector2 playerScreenPos = mainCamera.WorldToScreenPoint(player.position);

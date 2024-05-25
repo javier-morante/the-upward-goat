@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3883109020382247536}
   - component: {fileID: 8406111268056961831}
   - component: {fileID: 226268905522714736}
-  m_Layer: 7
-  m_Name: Particles
+  m_Layer: 3
+  m_Name: JumpParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4841,8 +4841,8 @@ GameObject:
   - component: {fileID: 7093874308058145663}
   - component: {fileID: 8788378474793937689}
   - component: {fileID: 271349506441905516}
-  m_Layer: 7
-  m_Name: Particles2
+  m_Layer: 3
+  m_Name: StompParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4856,13 +4856,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6480865941084074382}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2295308673849099871}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
 --- !u!198 &8788378474793937689
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4871,7 +4871,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6480865941084074382}
   serializedVersion: 8
-  lengthInSec: 0.2
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4936,7 +4936,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4946,7 +4946,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5494,15 +5494,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
+    type: 2
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0.1, z: 0}
-    m_Scale: {x: 0.85, y: 0.21, z: 1}
+    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -5581,7 +5581,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.77227783
       mode: 0
       spread: 0
       speed:
@@ -5700,7 +5700,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 600
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -6139,7 +6139,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0.08627451}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6321,7 +6321,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -6378,7 +6378,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.12
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6905,7 +6905,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 1
+    inWorldSpace: 0
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -7406,7 +7406,7 @@ ParticleSystem:
     magnitude:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 500
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -8389,8 +8389,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0, g: 1, b: 0.019954205, a: 1}
+        key1: {r: 1, g: 0, b: 0, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -8414,7 +8414,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -8447,7 +8447,7 @@ ParticleSystem:
         m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
-    range: {x: 0, y: 1}
+    range: {x: 0, y: 5}
   CollisionModule:
     enabled: 0
     serializedVersion: 4
@@ -9625,8 +9625,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 346555335
-  m_SortingLayer: 4
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -9675,7 +9675,7 @@ GameObject:
   - component: {fileID: 3351940432003678746}
   - component: {fileID: 3581579398466292185}
   - component: {fileID: 6421000341072832287}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Rocky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9864,6 +9864,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  slideMask:
+    serializedVersion: 2
+    m_Bits: 128
   boxSize: {x: 0.69, y: 0.3}
   castDistance: 0.55
   maxFall: 9.5
@@ -9879,6 +9882,9 @@ MonoBehaviour:
   stomp: {fileID: 8300000, guid: 16c216cf8572c284ab2d328a428be3b4, type: 3}
   bounce: {fileID: 8300000, guid: a61ef6f30444c2045a9cfc4bfda4c420, type: 3}
   coin: {fileID: 8300000, guid: 4ab53f27df7eaee44aca78448e2e5a4f, type: 3}
+  isGrounded: 0
+  isSlide: 0
+  boxSize2: {x: 0.58, y: 0.3}
 --- !u!81 &6421000341072832287
 AudioListener:
   m_ObjectHideFlags: 0

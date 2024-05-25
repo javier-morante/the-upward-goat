@@ -2,54 +2,56 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerControllerT : Subject<PlayerEvents>
 {
     [Header("Movement")]
-     public float moveSpeed = 5;
+    [SerializeField] private float moveSpeed = 5;
 
     [Space(10)]
 
     [Header("Jump")]
-     public float jumpMoveSpeed = 7f;
-     public float jumpValue = 0;
-     public float maxJump = 5;
-     public float jumpPerF = 0.1f;
+    [SerializeField] private float jumpMoveSpeed = 7f;
+    [SerializeField] private float jumpValue = 0;
+    [SerializeField] private float maxJump = 5;
+    [SerializeField] private float jumpPerF = 0.1f;
 
     [Space(10)]
 
-    [Header("Ground Check")]
-     public LayerMask groundMask;
-     public Vector2 boxSize;
-     public float castDistance;
+    [Header("Ground and Slide check")]
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask slideMask;
+    [SerializeField] private Vector2 boxSize;
+    [SerializeField] private Vector2 boxSize2;
+    [SerializeField] private float castDistance;
 
     [Space(10)]
 
     [Header("Fall")]
-     public float maxFall;
-     public float moveDesacelerationFalling = 1;
-     public float moveDesacelerationBounce = 1;
-     public float maxFallToStomp = 5;
+    [SerializeField] private float maxFall;
+    [SerializeField] private float moveDesacelerationFalling = 1;
+    [SerializeField] private float moveDesacelerationBounce = 1;
+    [SerializeField] private float maxFallToStomp = 5;
 
     [Space(10)]
 
     [Header("PhysicMaterails")]
-     public PhysicsMaterial2D normalMat;
-     public PhysicsMaterial2D bounceMat;
+    [SerializeField] private PhysicsMaterial2D normalMat;
+    [SerializeField] private PhysicsMaterial2D bounceMat;
 
     [Header("Particles")]
 
-     public ParticleSystem stompP;
-     public ParticleSystem jumpDust;
+    [SerializeField] private ParticleSystem stompP;
+    [SerializeField] private ParticleSystem jumpDust;
 
     [Space(10)]
 
     [Header("Sounds")]
-    public AudioClip jump;
-    public AudioClip fall;
-    public AudioClip stomp;
-    public AudioClip bounce;
-    public AudioClip coin;
+    [SerializeField] private AudioClip jump;
+    [SerializeField] private AudioClip fall;
+    [SerializeField] private AudioClip stomp;
+    [SerializeField] private AudioClip bounce;
+    [SerializeField] private AudioClip coin;
 
 
 
@@ -73,6 +75,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
     private float lateralMove;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private bool isSlide;
 
     void Awake()
     {
@@ -123,27 +126,12 @@ public class PlayerControllerT : Subject<PlayerEvents>
         }
     }
 
-    private void HandleBouncind()
-    {
-        ApplyFallVelocity(moveDesacelerationBounce);
-        if(Stomp())
-        {
-            ChangeState(State.Stomping);
-            AudioManager.instance.PlaySoundFX(stomp,transform,1f);
-
-        }else if (isGrounded && rb.velocity.y == 0f)
-        {
-            Debug.Log("caido");
-            ChangeState(State.Idle);
-            AudioManager.instance.PlaySoundFX(fall,transform,1f);
-        }
-    }
 
     void HandleIdle()
     {
         rb.velocity = new Vector2(0f, rb.velocity.y);
 
-        if (lateralMove != 0)
+        if (lateralMove != 0 && (!isSlide || rb.velocity.y == 0))
         {
             ChangeState(State.Walking);
         }
@@ -151,7 +139,8 @@ public class PlayerControllerT : Subject<PlayerEvents>
         {
             ChangeState(State.Charging);
 
-        }else if (rb.velocity.y < 0 && !isGrounded)
+        }
+        else if (rb.velocity.y < 0 && !isGrounded)
         {
             ChangeState(State.Falling);
         }
@@ -169,7 +158,8 @@ public class PlayerControllerT : Subject<PlayerEvents>
         {
             ChangeState(State.Charging);
 
-        }else if (rb.velocity.y < 0 && !isGrounded)
+        }
+        else if (rb.velocity.y < 0 && !isGrounded)
         {
             ChangeState(State.Falling);
         }
@@ -182,8 +172,12 @@ public class PlayerControllerT : Subject<PlayerEvents>
         if ((jumpValue >= maxJump || !jumpPressed && jumpValue >= 0.1f) && isGrounded)
         {
             this.NotifyObservers(PlayerEvents.Jump);
-            AudioManager.instance.PlaySoundFX(jump,transform,1f);
+            AudioManager.instance.PlaySoundFX(jump, transform, 1f);
             ChangeState(State.Jumping);
+        }
+        else if (rb.velocity.y < 0)
+        {
+            ChangeState(State.Falling);
         }
     }
 
@@ -201,23 +195,40 @@ public class PlayerControllerT : Subject<PlayerEvents>
     {
         ApplyFallVelocity(moveDesacelerationFalling);
 
-        if(Stomp())
+        if (Stomp())
         {
+            stompP.Play();
             ChangeState(State.Stomping);
-            AudioManager.instance.PlaySoundFX(stomp,transform,1f);
+            AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
 
-        }else if (isGrounded && rb.velocity.y == 0f)
+        }
+        else if (isGrounded && rb.velocity.y == 0f)
         {
-            Debug.Log("caido");
             ChangeState(State.Idle);
-            AudioManager.instance.PlaySoundFX(fall,transform,1f);
+            AudioManager.instance.PlaySoundFX(fall, transform, 1f);
+        }
+    }
+    private void HandleBouncind()
+    {
+        ApplyFallVelocity(moveDesacelerationBounce);
+        if (Stomp())
+        {
+            stompP.Play();
+            ChangeState(State.Stomping);
+            AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
+
+        }
+        else if (isGrounded && rb.velocity.y == 0f)
+        {
+            ChangeState(State.Idle);
+            AudioManager.instance.PlaySoundFX(fall, transform, 1f);
         }
     }
 
     void HandleStomping()
     {
         rb.velocity = new Vector2(0f, rb.velocity.y);
-         if (lateralMove != 0)
+        if (lateralMove != 0)
         {
             ChangeState(State.Walking);
         }
@@ -244,18 +255,19 @@ public class PlayerControllerT : Subject<PlayerEvents>
             fallMoment = null;
             if (distance > maxFallToStomp)
             {
-                
+
                 return true;
             }
         }
         return false;
     }
-    void ChargeJump(){
-        
+    void ChargeJump()
+    {
+
         rb.velocity = new Vector2(0f, rb.velocity.y);
         jumpValue += jumpPerF;
         chageDirection();
-        
+
     }
 
     void Jump()
@@ -267,7 +279,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
             float tempx = lateralMove * jumpMoveSpeed;
             float tempy = jumpValue;
             rb.velocity = new Vector2(tempx, tempy);
-            
+
             Invoke("ResetJump", 0.025f);
         }
     }
@@ -275,10 +287,10 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     void Move()
     {
-        
+
         rb.velocity = new Vector2(lateralMove * moveSpeed, rb.velocity.y);
         chageDirection();
-        
+
     }
 
     void ResetJump()
@@ -288,27 +300,28 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     void ApplyFallVelocity(float deseleration)
     {
-        
+
         rb.velocity = new Vector2(
             Mathf.MoveTowards(rb.velocity.x, 0, deseleration * Time.fixedDeltaTime),
             Mathf.Max(rb.velocity.y, -maxFall)
         );
-        
+
     }
 
     void CheckGround()
     {
         isGrounded = Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundMask);
-        col.sharedMaterial = isGrounded ? normalMat : bounceMat;
+        isSlide = Physics2D.BoxCast(transform.position, boxSize2, 0, -transform.up, castDistance, slideMask);
+        col.sharedMaterial = (isGrounded || isSlide) ? normalMat : bounceMat;
     }
 
     void CreateDust()
     {
-        
         jumpDust.Play();
     }
 
-    void chageDirection(){
+    void chageDirection()
+    {
         if (lateralMove != 0)
         {
             spriteR.flipX = lateralMove < 0;
@@ -318,22 +331,27 @@ public class PlayerControllerT : Subject<PlayerEvents>
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, boxSize);
+        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, boxSize2);
     }
 
-    void OnCollisionEnter2D(Collision2D collsion){
+    void OnCollisionEnter2D(Collision2D collsion)
+    {
 
-        if(!isGrounded && col.sharedMaterial == bounceMat){
-            AudioManager.instance.PlaySoundFX(bounce,transform,1f);
+        if (!isGrounded && col.sharedMaterial == bounceMat)
+        {
+            AudioManager.instance.PlaySoundFX(bounce, transform, 1f);
             ChangeState(State.Bouncing);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collsion){
-        if(collsion.gameObject.tag == "Coin"){
+    void OnTriggerEnter2D(Collider2D collsion)
+    {
+        if (collsion.gameObject.tag == "Coin")
+        {
             this.NotifyObservers(PlayerEvents.CoinCollected);
-            AudioManager.instance.PlaySoundFX(coin,transform,1f);
+            AudioManager.instance.PlaySoundFX(coin, transform, 1f);
             Destroy(collsion.gameObject);
         }
     }
-    
+
 }
