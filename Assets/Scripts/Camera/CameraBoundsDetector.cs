@@ -7,7 +7,6 @@ public class CameraBoundsDetector : MonoBehaviour
     private Camera mainCamera;
     private Transform mCamera;
     [SerializeField] private Transform player; 
-    [SerializeField] private BoxCollider2D playerC; 
 
     private void Start()
     {
@@ -21,42 +20,44 @@ public class CameraBoundsDetector : MonoBehaviour
 
         // Obtener las coordenadas de pantalla del jugador
         Vector2 playerScreenPos = mainCamera.WorldToScreenPoint(player.position);
-        Vector2 cameraCenterScreenPos = new Vector2(mainCamera.pixelWidth / 2, mainCamera.pixelHeight / 2);
-        Vector2 offset = playerScreenPos - cameraCenterScreenPos;
         float height = 2f * mainCamera.orthographicSize;
         float width = height * mainCamera.aspect;
-
-        float a = playerC.size.y / 2f;
-        float b = playerC.size.x / 2f;
 
         Rect cameraBounds = mainCamera.pixelRect;
 
 
-        if (playerScreenPos.x-b < cameraBounds.xMin || playerScreenPos.x+b > cameraBounds.xMax ||
-            playerScreenPos.y-a < cameraBounds.yMin || playerScreenPos.y+a > cameraBounds.yMax)
+         if (playerScreenPos.x < cameraBounds.xMin || playerScreenPos.x > cameraBounds.xMax ||
+            playerScreenPos.y < cameraBounds.yMin || playerScreenPos.y > cameraBounds.yMax)
         {
-            if (Mathf.Abs(offset.x) > Mathf.Abs(offset.y))
+            // Calcular la posición de la cámara centrada en el jugador
+            Vector3 newCameraPos = mCamera.position;
+
+            // Verificar si el jugador está a la izquierda o derecha de la cámara
+            if (playerScreenPos.x < cameraBounds.xMin)
             {
-                if (offset.x > 0)
-                {
-                    mCamera.position = new Vector3(mCamera.position.x + width, mCamera.position.y,mCamera.position.z);
-                }
-                else
-                {
-                    mCamera.position = new Vector3(mCamera.position.x - width, mCamera.position.y, mCamera.position.z);
-                }
+                // Jugador a la izquierda de la cámara
+                newCameraPos.x -= width;
             }
-            else
+            else if (playerScreenPos.x > cameraBounds.xMax)
             {
-                if (offset.y > 0)
-                {
-                    mCamera.position = new Vector3(mCamera.position.x, mCamera.position.y + height, mCamera.position.z);
-                }
-                else
-                {
-                    mCamera.position = new Vector3(mCamera.position.x, mCamera.position.y - height, mCamera.position.z);
-                }
+                // Jugador a la derecha de la cámara
+                newCameraPos.x += width;
             }
+
+            // Verificar si el jugador está arriba o abajo de la cámara
+            if (playerScreenPos.y < cameraBounds.yMin)
+            {
+                // Jugador abajo de la cámara
+                newCameraPos.y -= height;
+            }
+            else if (playerScreenPos.y > cameraBounds.yMax)
+            {
+                // Jugador arriba de la cámara
+                newCameraPos.y += height;
+            }
+
+            // Mover la cámara a la nueva posición
+            mCamera.position = newCameraPos;
         }
     }
 }

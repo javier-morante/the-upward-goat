@@ -6,16 +6,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour,IObserver<PlayerEvents>
+public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence
 {
     private int coinCount;
     private int jumpCounter;
     [SerializeField] private TextMeshProUGUI cronometerText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI jumpText;
-    [SerializeField] private Subject<PlayerEvents> subject;
 
     private float time;
+
+    public void LoadData(GameData gameData)
+    {
+        this.jumpCounter = gameData.jumpCount;
+        this.time = gameData.cronometer;
+    }
 
     public void OnNotify(PlayerEvents notification)
     {
@@ -31,11 +36,10 @@ public class UiManager : MonoBehaviour,IObserver<PlayerEvents>
         
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SaveData(ref GameData gameData)
     {
-    
-        subject.AddObserver(this);
+        gameData.jumpCount = this.jumpCounter;
+        gameData.cronometer = this.time;
     }
 
     // Update is called once per frame

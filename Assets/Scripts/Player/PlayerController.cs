@@ -1,9 +1,11 @@
 using System;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public class PlayerControllerT : Subject<PlayerEvents>
+public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5;
@@ -87,6 +89,8 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
     void Start()
     {
+        UiManager UiManager = GameObject.Find("GameManager").GetComponent<UiManager>();
+        this.AddObserver(UiManager);
         currentState = State.Idle;
     }
 
@@ -138,7 +142,6 @@ public class PlayerControllerT : Subject<PlayerEvents>
         else if (jumpPressed && isGrounded)
         {
             ChangeState(State.Charging);
-
         }
         else if (rb.velocity.y < 0 && !isGrounded)
         {
@@ -197,7 +200,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
 
         if (Stomp())
         {
-            stompP.Play();
+            StompParticles();
             ChangeState(State.Stomping);
             AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
 
@@ -213,7 +216,7 @@ public class PlayerControllerT : Subject<PlayerEvents>
         ApplyFallVelocity(moveDesacelerationBounce);
         if (Stomp())
         {
-            stompP.Play();
+            StompParticles();
             ChangeState(State.Stomping);
             AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
 
@@ -263,7 +266,6 @@ public class PlayerControllerT : Subject<PlayerEvents>
     }
     void ChargeJump()
     {
-
         rb.velocity = new Vector2(0f, rb.velocity.y);
         jumpValue += jumpPerF;
         chageDirection();
@@ -344,14 +346,20 @@ public class PlayerControllerT : Subject<PlayerEvents>
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collsion)
-    {
-        if (collsion.gameObject.tag == "Coin")
-        {
-            this.NotifyObservers(PlayerEvents.CoinCollected);
-            AudioManager.instance.PlaySoundFX(coin, transform, 1f);
-            Destroy(collsion.gameObject);
-        }
+    void StompParticles(){
+        Vector2 tParticle = transform.position;
+        tParticle.y -= col.size.y;
+        ParticleSystem particle = Instantiate(stompP,tParticle,stompP.transform.rotation);
+        particle.Play();
     }
 
+    public void LoadData(GameData gameData)
+    {
+        this.transform.position = gameData.playerPosition;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.playerPosition = this.transform.position;
+    }
 }
