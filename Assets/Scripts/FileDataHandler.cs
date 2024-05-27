@@ -43,15 +43,11 @@ public class FileDataHandler
 
     public void Save(GameData data){
         string  fullPath = Path.Combine(fileDirPath,fileName);
-        Debug.Log(fullPath);
         try
         {
-            Debug.Log(data);
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
             string dataToStore = JsonUtility.ToJson(data,true);
-
-            Debug.Log("Data to Store "+dataToStore);
 
             using(FileStream stream = new FileStream(fullPath,FileMode.Create)){
                 using(StreamWriter writer = new StreamWriter(stream)){

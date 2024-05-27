@@ -65,8 +65,6 @@ public class DataPersistanceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-        
-        Debug.Log("Loaded data jump: "+gameData.jumpCount);
 
     }
 
@@ -76,8 +74,7 @@ public class DataPersistanceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-
-        Debug.Log("Saved data vector: "+gameData.playerPosition);
+        
         fileDataHandler.Save(gameData);
     }
 
