@@ -4888,7 +4888,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5047,7 +5047,6 @@ MonoBehaviour:
   bounceMat: {fileID: 6200000, guid: c3e64e8ffba884947a5160e74f1e1df1, type: 2}
   stompP: {fileID: 0}
   jumpDust: {fileID: 8406111268056961831}
-  chargeP: {fileID: 0}
   jump: {fileID: 8300000, guid: 8bebd52b84535484dbda72a55a1f849a, type: 3}
   fall: {fileID: 8300000, guid: f83ecf24ac1d9cf4c8717e285f04e82b, type: 3}
   stomp: {fileID: 8300000, guid: 16c216cf8572c284ab2d328a428be3b4, type: 3}

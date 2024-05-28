@@ -32,12 +32,6 @@ public class PauseMenu : MonoBehaviour
         {
             audio.Play();
         }
-
-    }
-
-    public void Options(){
-        pauseMenu.SetActive(false);
-        optionMenu.SetActive(true);
     }
 
     public void Exit(){

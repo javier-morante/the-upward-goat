@@ -7,15 +7,13 @@ using UnityEngine.Audio;
 
 public class OptionsMenu : MonoBehaviour
 {
-        [SerializeField] private GameObject pauseMenu;
-        [SerializeField] private GameObject optionMenu;
         [SerializeField] TextMeshProUGUI optionsText;
         private string[] options = {"Full Screen","Window"};
-        [SerializeField]private int currentOption;
+        private int currentOption;
         [SerializeField] private AudioMixer audioMixer;
 
         void Start(){
-            currentOption = 0;
+            currentOption = Screen.fullScreen?1:0;
         }
 
         void Update(){
@@ -28,20 +26,21 @@ public class OptionsMenu : MonoBehaviour
                 currentOption = 0;
             }
         }
-        public void Previus(){
+        public void Previous(){
             currentOption -=1;
             if(currentOption < 0){
                 currentOption = options.Length-1;
             }
         }
 
-        public void Back(){
-            pauseMenu.SetActive(true);
-            optionMenu.SetActive(false);
-        }
-
-        public void SetVolume(float volume){
-            audioMixer.SetFloat("volume",volume);
+        public void SetMainVolume(float volume){
+            audioMixer.SetFloat("masterVolume",volume);
+        }  
+        public void SetEnviromentVolume(float volume){
+            audioMixer.SetFloat("enviromentVolume",volume);
+        }  
+        public void SetSFXVolume(float volume){
+            audioMixer.SetFloat("sfxVolume",volume);
         }  
 
         void OptionExec(){
