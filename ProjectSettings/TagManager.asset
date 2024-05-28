@@ -49,8 +49,11 @@ TagManager:
   - name: Ground
     uniqueID: 3466779795
     locked: 0
-  - name: a
+  - name: Miel
     uniqueID: 1416760345
+    locked: 0
+  - name: Coin
+    uniqueID: 2011056559
     locked: 0
   - name: Player
     uniqueID: 346555335
