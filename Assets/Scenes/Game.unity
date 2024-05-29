@@ -463,9 +463,21 @@ PrefabInstance:
       value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_Value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1306721762}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetEnviromentVolume
@@ -847,9 +859,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_Value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1306721762}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetSFXVolume
@@ -1756,7 +1780,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7291e7c7757abd64a83301ba608a11ef, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -3442,8 +3466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogText: {fileID: 1076978399}
   dialogTextGUI: {fileID: 0}
-  letterPerSecond: 0
-  TimeBetweenSentencesInSeconds: 0
+  letterPerSecond: 0.15
+  TimeBetweenSentencesInSeconds: 2
   dialogEnd:
     m_PersistentCalls:
       m_Calls:
@@ -4183,7 +4207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdfaf
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc874d1af65356e4daacd9767c90ded1, type: 2}
   m_sharedMaterial: {fileID: 1228051145918138138, guid: dc874d1af65356e4daacd9767c90ded1, type: 2}
@@ -4192,8 +4216,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 3825205248
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4498,7 +4522,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1306721763}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
@@ -17127,8 +17151,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 0
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -17454,7 +17478,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1306721763}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -18017,9 +18041,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_Value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
+      propertyPath: m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1306721762}
     - target: {fileID: 5657337799889598650, guid: 9ed74d1fa7524cf4781a9f1153bf06d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetMainVolume
@@ -18160,6 +18196,10 @@ PrefabInstance:
     - target: {fileID: 2513412712442802386, guid: 54783de494a514b4aa4c1e26cb21e882, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1306721762}
+    - target: {fileID: 2513412712442802386, guid: 54783de494a514b4aa4c1e26cb21e882, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Previous
       objectReference: {fileID: 0}
     - target: {fileID: 3929431859794576071, guid: 54783de494a514b4aa4c1e26cb21e882, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -18188,7 +18228,7 @@ PrefabInstance:
     - target: {fileID: 3929431859794576071, guid: 54783de494a514b4aa4c1e26cb21e882, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1306721762}
     - target: {fileID: 3929431859794576071, guid: 54783de494a514b4aa4c1e26cb21e882, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Next

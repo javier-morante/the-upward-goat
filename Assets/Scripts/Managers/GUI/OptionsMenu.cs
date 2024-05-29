@@ -34,13 +34,13 @@ public class OptionsMenu : MonoBehaviour
         }
 
         public void SetMainVolume(float volume){
-            audioMixer.SetFloat("masterVolume",volume);
+            audioMixer.SetFloat("masterVolume",volume-80);
         }  
         public void SetEnviromentVolume(float volume){
-            audioMixer.SetFloat("enviromentVolume",volume);
+            audioMixer.SetFloat("enviromentVolume",volume-80);
         }  
         public void SetSFXVolume(float volume){
-            audioMixer.SetFloat("sfxVolume",volume);
+            audioMixer.SetFloat("sfxVolume",volume-80);
         }  
 
         void OptionExec(){
