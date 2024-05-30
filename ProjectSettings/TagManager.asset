@@ -58,3 +58,6 @@ TagManager:
   - name: Player
     uniqueID: 346555335
     locked: 0
+  - name: SecretArea
+    uniqueID: 3544616577
+    locked: 0

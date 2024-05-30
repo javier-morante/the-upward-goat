@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using System;
 
-public class FileDataHandler
+public class FileDataHandler<T> where T : class
 {
     private string fileDirPath = "";
 
@@ -17,9 +17,9 @@ public class FileDataHandler
     }
 
 
-    public GameData Load(){
+    public T Load(){
         string  fullPath = Path.Combine(fileDirPath,fileName);
-        GameData loadedData = null;
+        T loadedData = null;
         if (File.Exists(fullPath))
         {
             try
@@ -31,7 +31,7 @@ public class FileDataHandler
                         dataToLoad = reader.ReadToEnd();                    
                     }
                 }
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadedData = JsonUtility.FromJson<T>(dataToLoad);
             }   
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data){
+    public void Save(T data){
         string  fullPath = Path.Combine(fileDirPath,fileName);
         try
         {

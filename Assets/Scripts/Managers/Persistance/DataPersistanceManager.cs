@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataPersistanceManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DataPersistanceManager : MonoBehaviour
     private GameData gameData;
 
     private List<IDataPersistence> dataPersistences;
-    private FileDataHandler fileDataHandler;
+    private FileDataHandler<GameData> fileDataHandler;
 
     public static DataPersistanceManager instance { get; private set; }
 
@@ -25,16 +26,33 @@ public class DataPersistanceManager : MonoBehaviour
         {
 
             Debug.LogError("More than on Data persistance");
-
+            Destroy(this.gameObject);
+            return;
         }
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        this.fileDataHandler = new FileDataHandler<GameData>(Application.persistentDataPath,fileName);
     }
 
-    void Start()
-    {
-        this.fileDataHandler = new FileDataHandler(Application.persistentDataPath,fileName);
+    void OnEnable(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        Debug.Log("Loaded");
         this.dataPersistences = FindAllDataPersistance();
         LoadGame();
+    }
+
+    void OnSceneUnloaded(Scene scene){
+        Debug.Log("unloaded");
+        SaveGame();
     }
 
     private List<IDataPersistence> FindAllDataPersistance()
@@ -45,7 +63,7 @@ public class DataPersistanceManager : MonoBehaviour
         return new List<IDataPersistence>(dataPersistencesObjects);
     }
 
-    void NewGame()
+    public void NewGame()
     {
         this.gameData = new GameData();
     }
@@ -57,8 +75,8 @@ public class DataPersistanceManager : MonoBehaviour
 
         if (this.gameData == null)
         {
-            Debug.Log("No data was found");
-            NewGame();
+            Debug.Log("No was found. A new game needs to be started");
+            return;
         }
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistences)
@@ -70,6 +88,12 @@ public class DataPersistanceManager : MonoBehaviour
 
     void SaveGame()
     {
+        if (this.gameData == null)
+        {
+            Debug.LogWarning("No was found.A new game needs to be started");
+            return;
+        }
+        
         foreach (IDataPersistence dataPersistenceObj in dataPersistences)
         {
             dataPersistenceObj.SaveData(ref gameData);
@@ -81,4 +105,12 @@ public class DataPersistanceManager : MonoBehaviour
     void OnApplicationQuit(){
         SaveGame();
     }
+
+    public GameData GetGameData(){
+        return gameData;
+    }
+
+    public bool HasGameData(){
+        return gameData != null;
+    } 
 }

@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraBoundsDetector : MonoBehaviour
+public class CameraMovement : MonoBehaviour,IDataPersistence
 {
     private Camera mainCamera;
     private Transform mCamera;
-    [SerializeField] private Transform player; 
+    [SerializeField] private Transform player;
+
+    public void LoadData(GameData gameData)
+    {
+        this.transform.position = gameData.cameraPosition;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.cameraPosition = this.transform.position;
+    }
 
     private void Start()
     {
@@ -16,9 +26,7 @@ public class CameraBoundsDetector : MonoBehaviour
 
     void Update()
     {
-        
-
-        // Obtener las coordenadas de pantalla del jugador
+        // Get cordinates of player in the screen
         Vector2 playerScreenPos = mainCamera.WorldToScreenPoint(player.position);
         float height = 2f * mainCamera.orthographicSize;
         float width = height * mainCamera.aspect;
@@ -29,34 +37,32 @@ public class CameraBoundsDetector : MonoBehaviour
          if (playerScreenPos.x < cameraBounds.xMin || playerScreenPos.x > cameraBounds.xMax ||
             playerScreenPos.y < cameraBounds.yMin || playerScreenPos.y > cameraBounds.yMax)
         {
-            // Calcular la posición de la cámara centrada en el jugador
             Vector3 newCameraPos = mCamera.position;
 
-            // Verificar si el jugador está a la izquierda o derecha de la cámara
+            // Check if player is an right or left of the camera
             if (playerScreenPos.x < cameraBounds.xMin)
             {
-                // Jugador a la izquierda de la cámara
+                // Player is on right
                 newCameraPos.x -= width;
             }
             else if (playerScreenPos.x > cameraBounds.xMax)
             {
-                // Jugador a la derecha de la cámara
+                // Player is on left
                 newCameraPos.x += width;
             }
 
-            // Verificar si el jugador está arriba o abajo de la cámara
+            // Check if player is up or down of the camera
             if (playerScreenPos.y < cameraBounds.yMin)
             {
-                // Jugador abajo de la cámara
+                // Player is down
                 newCameraPos.y -= height;
             }
             else if (playerScreenPos.y > cameraBounds.yMax)
             {
-                // Jugador arriba de la cámara
+                // Player is up
                 newCameraPos.y += height;
             }
 
-            // Mover la cámara a la nueva posición
             mCamera.position = newCameraPos;
         }
     }

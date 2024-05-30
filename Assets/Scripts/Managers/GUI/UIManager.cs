@@ -46,11 +46,8 @@ public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence
     void Update()
     {
         time += Time.deltaTime;
-        int mseconds = Mathf.FloorToInt((time % 1)*100);
-        int seconds = Mathf.FloorToInt(time % 60);
-        int minutes = Mathf.FloorToInt(time / 60);
-        int hours = Mathf.FloorToInt(time*60);
-        cronometerText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:00}",TimeSpan.FromSeconds(time).Hours,minutes,seconds,mseconds);
+        TimeSpan tmpTime = TimeSpan.FromSeconds(time);
+        cronometerText.text = string.Format("{0:t}",tmpTime.ToString());
 
         coinText.text = "Coins:"+coinCount;
         jumpText.text = "Jumps:"+jumpCounter;
