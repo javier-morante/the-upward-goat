@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MenuManagment : MonoBehaviour
 {
     [SerializeField] private Button continueButton;
+    [SerializeField] private ScenesManager scenesManager;
 
     void Start(){
         if(!DataPersistanceManager.instance.HasGameData()){
@@ -17,11 +18,11 @@ public class MenuManagment : MonoBehaviour
 
     public void NewGameButton(){
         DataPersistanceManager.instance.NewGame();
-        SceneManager.LoadScene("Game");
+        scenesManager.NextScene("Game");
     }
 
     public void ContinueButton(){
-        SceneManager.LoadScene("Game");
+        scenesManager.NextScene("Game");
     }
     public void ExitButton(){
         Application.Quit();

@@ -61,4 +61,12 @@ public class FileDataHandler<T> where T : class
         }
 
     }
+
+    public void DeleteFile(){
+        string  fullPath = Path.Combine(fileDirPath,fileName);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+    }
 }

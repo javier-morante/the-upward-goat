@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour,IDataPersistence
+public class CameraMovement : MonoBehaviour,IDataPersistence<GameData>
 {
     private Camera mainCamera;
     private Transform mCamera;

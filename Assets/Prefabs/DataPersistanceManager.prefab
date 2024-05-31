@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7de1bdd31795984b9a4cfa411c6bbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: test.json
+  fileNameGameData: game.ugoat
+  fileNameSettings: settings.json

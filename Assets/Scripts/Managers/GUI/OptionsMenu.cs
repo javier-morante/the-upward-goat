@@ -4,20 +4,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
-public class OptionsMenu : MonoBehaviour
+public class OptionsMenu : MonoBehaviour,IDataPersistence<SettingsData>
 {
-        [SerializeField] TextMeshProUGUI optionsText;
+        [SerializeField] private TextMeshProUGUI optionsText;
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private Slider mainVolume;
+        [SerializeField] private Slider enviromentVolume;
+        [SerializeField] private Slider sfxVolume;
+        
         private string[] options = {"Full Screen","Window"};
         private int currentOption;
-        [SerializeField] private AudioMixer audioMixer;
 
-        void Start(){
-            currentOption = Screen.fullScreen?1:0;
-        }
 
         void Update(){
             OptionExec();
+            audioMixer.SetFloat("masterVolume",mainVolume.value-80);
+            audioMixer.SetFloat("enviromentVolume",enviromentVolume.value-80);
+            audioMixer.SetFloat("sfxVolume",sfxVolume.value-80);
         }
     
         public void Next(){
@@ -56,4 +61,19 @@ public class OptionsMenu : MonoBehaviour
             }
         }
 
+    public void LoadData(SettingsData data)
+    {
+        this.mainVolume.value = data.mainVolume;
+        this.enviromentVolume.value = data.enviromentVolume;
+        this.sfxVolume.value = data.enviromentVolume;
+        this.currentOption = data.screenOption;
+    }
+
+    public void SaveData(ref SettingsData data)
+    {
+        data.mainVolume = this.mainVolume.value;
+        data.enviromentVolume = this.enviromentVolume.value;
+        data.sfxVolume = this.sfxVolume.value;
+        data.screenOption = currentOption;
+    }
 }

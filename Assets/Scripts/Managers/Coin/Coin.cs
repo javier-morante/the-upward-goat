@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Coin : Subject<PlayerEvents>{
+public class Coin : Subject<PlayerEvents>,IDataPersistence<GameData>{
 
-    private string id;
+    public string id;
+    private bool collected;
     [SerializeField] private AudioClip coin;
+
+    [ContextMenu("Generate id")]
+    private void GenerateGui(){
+        id = System.Guid.NewGuid().ToString();
+    }
 
     void Start(){
 
@@ -19,6 +25,25 @@ public class Coin : Subject<PlayerEvents>{
             this.NotifyObservers(PlayerEvents.CoinCollected);
             AudioManager.instance.PlaySoundFX(coin, transform, 1f);
             gameObject.SetActive(false);
+            collected = true;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+
+        data.coins.TryGetValue(id,out collected);
+        if(collected){
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.coins.ContainsKey(id))
+        {
+            data.coins.Remove(id);
+        }
+        data.coins.Add(id,collected);
     }
 }

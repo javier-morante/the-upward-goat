@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence
+public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameData>
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5;

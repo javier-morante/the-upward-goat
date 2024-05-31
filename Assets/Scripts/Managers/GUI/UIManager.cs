@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence
+public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence<GameData>
 {
     private int coinCount;
     private int jumpCounter;
@@ -16,10 +16,17 @@ public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence
 
     private float time;
 
-    public void LoadData(GameData gameData)
+      public void LoadData(GameData gameData)
     {
         this.jumpCounter = gameData.jumpCount;
         this.time = gameData.cronometer;
+        this.coinCount = gameData.coinsCollected;
+    }
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.jumpCount = this.jumpCounter;
+        gameData.cronometer = this.time;
+        gameData.coinsCollected = this.coinCount;
     }
 
     public void OnNotify(PlayerEvents notification)
@@ -36,20 +43,24 @@ public class UiManager : MonoBehaviour,IObserver<PlayerEvents>,IDataPersistence
         
     }
 
-    public void SaveData(ref GameData gameData)
-    {
-        gameData.jumpCount = this.jumpCounter;
-        gameData.cronometer = this.time;
-    }
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
-        TimeSpan tmpTime = TimeSpan.FromSeconds(time);
-        cronometerText.text = string.Format("{0:t}",tmpTime.ToString());
+
+        cronometerText.text = formatStringToTime(time);
 
         coinText.text = "Coins:"+coinCount;
         jumpText.text = "Jumps:"+jumpCounter;
+    }
+
+    public static string formatStringToTime(float time){
+        TimeSpan tmpTime = TimeSpan.FromSeconds(time);
+            return string.Format("{0:00}:{1:00}:{2:00}:{3:00}", 
+                                                tmpTime.Hours, 
+                                                tmpTime.Minutes, 
+                                                tmpTime.Seconds, 
+                                                tmpTime.Milliseconds/10);
     }
 }

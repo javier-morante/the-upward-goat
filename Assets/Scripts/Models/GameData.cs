@@ -7,19 +7,22 @@ public class GameData
 {
     public float cronometer;
     public int jumpCount;
-    public int coins;   
+    public int coinsCollected;   
     public Vector3 playerPosition;
 
     public Vector3 cameraPosition;
+
+    public SerialitzableDictionary<string,bool> coins;
 
     
 
     public GameData(){
         jumpCount = 0;
         cronometer = 0f;
-        coins = 0;
+        coinsCollected = 0;
         playerPosition = Vector3.zero;
         cameraPosition = new Vector3(0,0,-10);
+        coins = new SerialitzableDictionary<string, bool>();
     }
 
     

@@ -8,6 +8,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private AudioSource[] audioSources;
 
+    void Start(){
+        Time.timeScale = 1;
+    }
+
     void Update()
     {
         if(Input.GetKey(KeyCode.Escape)){
@@ -32,9 +36,5 @@ public class PauseMenu : MonoBehaviour
         {
             audio.Play();
         }
-    }
-
-    public void Exit(){
-        Application.Quit();
     }
 }
