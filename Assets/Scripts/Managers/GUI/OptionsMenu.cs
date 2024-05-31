@@ -17,6 +17,10 @@ public class OptionsMenu : MonoBehaviour,IDataPersistence<SettingsData>
         private string[] options = {"Full Screen","Window"};
         private int currentOption;
 
+        void Start(){
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = (int) Screen.currentResolution.refreshRateRatio.value;
+        }
 
         void Update(){
             OptionExec();

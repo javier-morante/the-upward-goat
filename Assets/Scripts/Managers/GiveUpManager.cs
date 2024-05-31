@@ -10,6 +10,7 @@ public class GiveUpManage : MonoBehaviour
     private float time;
     void Update()
     {
+        CursorManager.HideCursor(true);
         time += Time.deltaTime;
         if (time > secondsBetweenSound)
         {

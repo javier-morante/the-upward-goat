@@ -205,7 +205,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
             AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
 
         }
-        else if (isGrounded && rb.velocity.y == 0f)
+        else if ((isGrounded || isSlide) && rb.velocity.y == 0f)
         {
             ChangeState(State.Idle);
             AudioManager.instance.PlaySoundFX(fall, transform, 1f);
@@ -221,7 +221,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
             AudioManager.instance.PlaySoundFX(stomp, transform, 1f);
 
         }
-        else if (isGrounded && rb.velocity.y == 0f)
+        else if ((isGrounded || isSlide) && rb.velocity.y == 0f)
         {
             ChangeState(State.Idle);
             AudioManager.instance.PlaySoundFX(fall, transform, 1f);

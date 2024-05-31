@@ -14,6 +14,7 @@ public class MenuManagment : MonoBehaviour
         if(!DataPersistanceManager.instance.HasGameData()){
             continueButton.interactable = false;
         }
+        CursorManager.HideCursor(false);
     }
 
     public void NewGameButton(){
@@ -21,9 +22,6 @@ public class MenuManagment : MonoBehaviour
         scenesManager.NextScene("Game");
     }
 
-    public void ContinueButton(){
-        scenesManager.NextScene("Game");
-    }
     public void ExitButton(){
         Application.Quit();
     }

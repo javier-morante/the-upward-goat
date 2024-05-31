@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start(){
         Time.timeScale = 1;
+        CursorManager.HideCursor(false);
     }
 
     void Update()
@@ -22,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause(){
         pauseMenu.SetActive(true);
         optionMenu.SetActive(false);
+        CursorManager.HideCursor(false);
         Time.timeScale = 0;
         foreach (AudioSource audio in audioSources)
         {
@@ -31,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume(){
         pauseMenu.SetActive(false);
+        CursorManager.HideCursor(true);
         Time.timeScale = 1;
         foreach (AudioSource audio in audioSources)
         {

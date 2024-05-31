@@ -8,6 +8,7 @@ public class FinishManager : MonoBehaviour
     
     void Start()
     {
+        CursorManager.HideCursor(true);
         if (DataPersistanceManager.instance.HasGameData())
         {
             

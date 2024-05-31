@@ -13,7 +13,6 @@ public class SettingsData
 
    public int screenOption;
 
-
    public SettingsData(){
 
     mainVolume = 50;
