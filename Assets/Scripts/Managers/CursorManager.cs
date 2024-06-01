@@ -6,7 +6,7 @@ public class CursorManager : MonoBehaviour
 {
     public static void HideCursor(bool hide){
         Cursor.lockState = hide?CursorLockMode.Locked:CursorLockMode.None;
-        Cursor.visible = hide;
+        Cursor.visible = !hide;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
