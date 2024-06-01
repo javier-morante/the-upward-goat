@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionMenu;
+    [SerializeField] private ScenesManager scenesManager;
     [SerializeField] private AudioSource[] audioSources;
 
     void Start(){
@@ -39,5 +40,10 @@ public class PauseMenu : MonoBehaviour
         {
             audio.Play();
         }
+    }
+
+    public void GiveUp(){
+        DataPersistanceManager.instance.DeleteGameData();
+        scenesManager.NextSceneWithOutSave("GiveUp");
     }
 }
