@@ -1,14 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-// ============== INSTRUCTION ==============
-// Create empty game object and add "Box Collider" component
-// Set the "Box Collider" to "Is Trigger"
-// Adjust its size to fit the ambience area
-// Create another empty game object and add this script
-// Select "Area" as well as "Player" in the inspector
-// Add sound to the object
 
 public class AmbienceSound : MonoBehaviour
 {

@@ -1,8 +1,5 @@
-using System;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameData>
@@ -33,6 +30,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
     [SerializeField] private float maxFall;
     [SerializeField] private float moveDesacelerationFalling = 1;
     [SerializeField] private float moveDesacelerationBounce = 1;
+    [SerializeField] private float minVelociyBounce;
     [SerializeField] private float maxFallToStomp = 5;
 
     [Space(10)]
@@ -55,7 +53,10 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
     [SerializeField] private AudioClip bounce;
     [SerializeField] private AudioClip coin;
 
+    [Space(10)]
 
+    [Header("Jump Charge Bar")]
+    [SerializeField] private Slider jumpChargeBar;
 
     private enum State
     {
@@ -92,6 +93,12 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
         UiManager UiManager = GameObject.Find("GameManager").GetComponent<UiManager>();
         this.AddObserver(UiManager);
         currentState = State.Idle;
+        if (jumpChargeBar != null)
+        {
+            jumpChargeBar.maxValue = maxJump;
+            jumpChargeBar.value = 0;
+        }
+        
     }
 
     void Update()
@@ -196,7 +203,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
 
     void HandleFalling()
     {
-        ApplyFallVelocity(moveDesacelerationFalling);
+        ApplyFallVelocity(moveDesacelerationFalling,0);
 
         if (Stomp())
         {
@@ -213,7 +220,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
     }
     private void HandleBouncind()
     {
-        ApplyFallVelocity(moveDesacelerationBounce);
+        ApplyFallVelocity(moveDesacelerationBounce,minVelociyBounce);
         if (Stomp())
         {
             StompParticles();
@@ -268,6 +275,7 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
     {
         rb.velocity = new Vector2(0f, rb.velocity.y);
         jumpValue += jumpPerF;
+        if (jumpChargeBar != null) jumpChargeBar.value = jumpValue; 
         chageDirection();
 
     }
@@ -298,13 +306,14 @@ public class PlayerControllerT : Subject<PlayerEvents>, IDataPersistence<GameDat
     void ResetJump()
     {
         jumpValue = 0.0f;
+        if (jumpChargeBar != null) jumpChargeBar.value = 0f; 
     }
 
-    void ApplyFallVelocity(float deseleration)
+    void ApplyFallVelocity(float deseleration, float minVelociy)
     {
 
         rb.velocity = new Vector2(
-            Mathf.MoveTowards(rb.velocity.x, 0, deseleration * Time.fixedDeltaTime),
+            Mathf.MoveTowards(rb.velocity.x, minVelociy, deseleration * Time.fixedDeltaTime),
             Mathf.Max(rb.velocity.y, -maxFall)
         );
 

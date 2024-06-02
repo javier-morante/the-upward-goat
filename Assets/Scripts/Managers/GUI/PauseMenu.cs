@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    // Reference to the pause menu UI
     [SerializeField] private GameObject pauseMenu;
+    // Reference to the options menu UI
     [SerializeField] private GameObject optionMenu;
+    // Array of audio sources to be paused/resumed
     [SerializeField] private AudioSource[] audioSources;
 
+    // Set up initial settings
     void Start(){
         Time.timeScale = 1;
         CursorManager.HideCursor(true);
     }
 
+    // Check for input to pause the game
     void Update()
     {
         if(Input.GetKey(KeyCode.Escape)){
@@ -20,6 +25,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // Pause the game
     public void Pause(){
         pauseMenu.SetActive(true);
         optionMenu.SetActive(false);
@@ -31,6 +37,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // Resume the game
     public void Resume(){
         pauseMenu.SetActive(false);
         CursorManager.HideCursor(true);
@@ -41,13 +48,16 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // Handle the "Give Up" action
     public void GiveUp(){
         DataPersistanceManager.instance.DeleteGameData();
         TransitionManager.instance.LoadScene(SceneName.GiveUp);
     }
 
+    // Exit the game
     public void Exit(){
         DataPersistanceManager.instance.SaveGameData();
         TransitionManager.instance.LoadSceneWithProgressBar(SceneName.Menu);
     }
 }
+

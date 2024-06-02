@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// Class to manage SFX sounds
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;

@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    public static void HideCursor(bool hide){
-        Cursor.lockState = hide?CursorLockMode.Locked:CursorLockMode.None;
+    // Method to hide or show the cursor
+    public static void HideCursor(bool hide)
+    {
+        // Lock or unlock the cursor based on the 'hide' parameter
+        Cursor.lockState = hide ? CursorLockMode.Locked : CursorLockMode.None;
+        // Set the visibility of the cursor based on the inverse of the 'hide' parameter
         Cursor.visible = !hide;
     }
 
+    // Method called before the splash screen is displayed
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-    static void OnBeforeSplashScreen(){
+    static void OnBeforeSplashScreen()
+    {
+        // Hide the cursor when the game starts
         HideCursor(true);
     }
 }
+
