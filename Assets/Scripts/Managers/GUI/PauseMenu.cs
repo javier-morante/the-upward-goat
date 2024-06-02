@@ -6,12 +6,11 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionMenu;
-    [SerializeField] private ScenesManager scenesManager;
     [SerializeField] private AudioSource[] audioSources;
 
     void Start(){
         Time.timeScale = 1;
-        CursorManager.HideCursor(false);
+        CursorManager.HideCursor(true);
     }
 
     void Update()
@@ -44,6 +43,11 @@ public class PauseMenu : MonoBehaviour
 
     public void GiveUp(){
         DataPersistanceManager.instance.DeleteGameData();
-        scenesManager.NextSceneWithOutSave("GiveUp");
+        TransitionManager.instance.LoadScene(SceneName.GiveUp);
+    }
+
+    public void Exit(){
+        DataPersistanceManager.instance.SaveGameData();
+        TransitionManager.instance.LoadSceneWithProgressBar(SceneName.Menu);
     }
 }

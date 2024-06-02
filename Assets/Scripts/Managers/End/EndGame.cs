@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DialogTrCont : MonoBehaviour
+public class EndGame : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     private bool firstTime = true;
@@ -15,4 +15,9 @@ public class DialogTrCont : MonoBehaviour
             firstTime = false;
         }
    }
+
+    public void End(){
+        TransitionManager.instance.LoadScene(SceneName.End);
+    }
+
 }

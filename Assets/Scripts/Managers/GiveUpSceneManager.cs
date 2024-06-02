@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GiveUpManage : MonoBehaviour
 { 
-    [SerializeField] private ScenesManager scenesManag;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float secondsBetweenSound;
     private float time;
@@ -19,7 +18,7 @@ public class GiveUpManage : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Escape))
         {
-            this.scenesManag.NextSceneWithOutSave("Menu");
+           TransitionManager.instance.LoadSceneWithProgressBar(SceneName.Menu);
         }
     }
 }

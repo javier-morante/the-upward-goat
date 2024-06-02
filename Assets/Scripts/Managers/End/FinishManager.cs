@@ -8,7 +8,9 @@ public class FinishManager : MonoBehaviour
     
     void Start()
     {
+        Time.timeScale = 1;
         CursorManager.HideCursor(true);
+        
         if (DataPersistanceManager.instance.HasGameData())
         {
             
@@ -20,5 +22,9 @@ public class FinishManager : MonoBehaviour
             };
             FindObjectOfType<DialogManager>().StartDialog(sentences);
         }
+    }
+
+    public void ToMenu(){
+        TransitionManager.instance.LoadSceneWithProgressBar(SceneName.Menu);
     }
 }
