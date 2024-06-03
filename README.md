@@ -27,7 +27,7 @@ You have to overcome different obstacles, such as walls with a hole underneath o
 
 ## Installation Instructions
 ### Windows
-1. Download [TheUpwardGoat_Win_64]([./TheUpwardGoat_Win_64.zip](https://github.com/javier-morante/the-upward-goat/releases/download/TheUpwardGoat/TheUpwardGoat_Win_64.zip)).
+1. Download [TheUpwardGoat_Win_64](https://github.com/javier-morante/the-upward-goat/releases/download/TheUpwardGoat/TheUpwardGoat_Win_64.zip).
 2. Unzip the file.
 3. Open the unzipped folder.
 4. Click on the executable which is the one that has an image of a green goat and is named TheUpwardGoat.
