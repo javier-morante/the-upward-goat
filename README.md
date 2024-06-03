@@ -33,7 +33,7 @@ You have to overcome different obstacles, such as walls with a hole underneath o
 4. Click on the executable which is the one that has an image of a green goat and is named TheUpwardGoat.
 
 ### Linux
-1. Download [TheUpwardGoar_Linux](https://github.com/javier-morante/the-upward-goat/releases/download/TheUpwardGoat/TheUpwardGoat_Win_64.zip).
+1. Download [TheUpwardGoar_Linux](https://github.com/javier-morante/the-upward-goat/releases/download/TheUpwardGoat/TheUpwardGoar_Linux.zip).
 2. Unzip the file with the folowing commad.
 ```
 sudo unzip TheUpwardGoar_Linux
